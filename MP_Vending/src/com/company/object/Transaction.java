@@ -8,9 +8,9 @@ public class Transaction {
 
     private Long tranxId = new Long(0);
     private Date tranx_dateTime;
-    private Double totalAmountDue = new Double(0);
-    private Double amountReceive;
-    private Double amountChange;
+    private int totalAmountDue = 0;
+    private int amountReceive;
+    private int amountChange = 0;
     private List<Item> itemList;
 
 
@@ -18,7 +18,7 @@ public class Transaction {
         this.tranxId++;
     }
 
-    public Transaction(Double amountReceive, List<Item> itemList) {
+    public Transaction(int amountReceive, List<Item> itemList) {
         this.tranxId++;
         this.tranx_dateTime = new Date();
         this.amountReceive = amountReceive;
@@ -26,19 +26,23 @@ public class Transaction {
     }
 
     //process payment
-    public void processPayment(Double paymentAmount, List<Item> items, CashBox cashBox) throws Exception {
+    public int processPayment(int paymentAmount, List<Item> items, CashBox cashBox) throws Exception {
         //compute total amount due of product/item
         System.out.println("Processing payment...");
         for (Item item : items){
-            this.totalAmountDue += item.getPrice();
+            this.totalAmountDue += item.getPrice().intValue();
         }
 
         setAmountReceive(paymentAmount);
 
         //check paymentAmount is sufficient
         if(getAmountReceive() >= getTotalAmountDue()){
+
             setTranx_dateTime(new Date());
             setAmountChange(getAmountReceive() - getTotalAmountDue());
+
+            //set sales amount in cashbox
+            cashBox.setTotalSalesAmount(new Double(getTotalAmountDue()));
 
             //display transaction details
             System.out.println("TranxID: " + getTranxId());
@@ -51,7 +55,7 @@ public class Transaction {
             System.out.println("Insufficient Payment amount.");
         }
 
-
+        return getAmountChange();
     }
 
     //deposit cash to cashBox
@@ -76,27 +80,27 @@ public class Transaction {
         this.tranx_dateTime = tranx_dateTime;
     }
 
-    public Double getTotalAmountDue() {
+    public int getTotalAmountDue() {
         return totalAmountDue;
     }
 
-    public void setTotalAmountDue(Double totalAmountDue) {
+    public void setTotalAmountDue(int totalAmountDue) {
         this.totalAmountDue = totalAmountDue;
     }
 
-    public Double getAmountReceive() {
+    public int getAmountReceive() {
         return amountReceive;
     }
 
-    public void setAmountReceive(Double amountReceive) {
+    public void setAmountReceive(int amountReceive) {
         this.amountReceive = amountReceive;
     }
 
-    public Double getAmountChange() {
+    public int getAmountChange() {
         return amountChange;
     }
 
-    public void setAmountChange(Double amountChange) {
+    public void setAmountChange(int amountChange) {
         this.amountChange = amountChange;
     }
 

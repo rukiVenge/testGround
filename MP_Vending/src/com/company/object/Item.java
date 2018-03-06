@@ -2,29 +2,27 @@ package com.company.object;
 
 public class Item {
 
-    private Long itemId = new Long(0);
     private String description;
     private int calories;
     private Double price;
+    private int noOFStocks = 0;
 
     public Item() {
-        this.itemId++;
     }
 
     public Item(String description, int calories, Double price) {
-        this.itemId++;
         this.description = description;
         this.calories = calories;
         this.price = price;
     }
 
-    public Long getItemId() {
-        return itemId;
+    public Item(String description, int calories, Double price, int noOfStocks) {
+        this.description = description;
+        this.calories = calories;
+        this.price = price;
+        this.noOFStocks = noOfStocks;
     }
 
-    public void setItemId(Long itemId) {
-        this.itemId = itemId;
-    }
 
     public String getDescription() {
         return description;
@@ -48,5 +46,13 @@ public class Item {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public int getNoOFStocks() {
+        return noOFStocks;
+    }
+
+    public void setNoOFStocks(int noOFStocks) {
+        this.noOFStocks = noOFStocks;
     }
 }
