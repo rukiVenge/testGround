@@ -43,7 +43,8 @@ public class Main {
             }else{
                 exit();
             }
-
+            //should have the option to add supply(adding item) or add cashBox (with adding cash)
+            //there should be option whether to create another object / cash box / go back to main menu
             if(choice.equals("1")){
                 System.out.print("Enter Vending Machine Name: ");
                 String vendingMachineName = scanner.nextLine();
@@ -56,7 +57,12 @@ public class Main {
                 }
 
             }
-
+            
+            
+            //testing menu should be added (if no vending machine was created, plese use the testVendingMachine
+            //1-Add cash
+            //2-Select item
+            //
             if(choice.equals("2")){
                 if(vm == null){
                     testVendingMachine(null);
