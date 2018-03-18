@@ -17,7 +17,7 @@ public class Main {
 
         VendingMachine vm = null;
         //select menu 1 - create vending machine, 2 - test vending machine, 3 - exit
-        System.out.println("Venidng Machine");
+        System.out.println("Vending Machine");
         int endFlag = 0;
 
         OUTER:
@@ -25,7 +25,7 @@ public class Main {
             System.out.println("Please type the #:");
             System.out.println("1 - Create a new Vending Machine (Regular only)");
             System.out.println("2 - Test Vending Machine (Regular only)");
-            System.out.print("3 - Exit program\n#");
+            System.out.print("3 - Exit program\n#:");
             Scanner scanner = new Scanner(System.in);
             String choice = scanner.nextLine();
 
@@ -46,16 +46,7 @@ public class Main {
             //should have the option to add supply(adding item) or add cashBox (with adding cash)
             //there should be option whether to create another object / cash box / go back to main menu
             if(choice.equals("1")){
-                System.out.print("Enter Vending Machine Name: ");
-                String vendingMachineName = scanner.nextLine();
-                if(vendingMachineName != ""){
-                    vm = createVendingMachine(vendingMachineName);
-                    continue OUTER;
-                }else {
-                    vm = createVendingMachine("defaultvendingName");
-                    continue OUTER;
-                }
-
+                vm = createVendingMachineMenu(vm);
             }
             
             
@@ -153,6 +144,51 @@ public class Main {
         System.out.println("Total Cash Amount in Cash Box: " + vm.getTotalCashAmount().intValue());
 
     }
+
+    public static VendingMachine createVendingMachineMenu(VendingMachine vm){
+        boolean isCreateVendingMenuExit = false;
+        Scanner createVM = new Scanner(System.in);
+
+        //will not exit the loop unless user select to quit this menu
+        while(isCreateVendingMenuExit){
+            System.out.print("Please name your vending machine:");
+            String vmName = createVM.nextLine();
+            vm = createVendingMachine(vmName);
+
+            boolean isAddVMAttrib = true;
+            while(isAddVMAttrib){
+                System.out.println("What do you want to do next?");
+                System.out.println("1 - Add Cash in Cash Box");
+                System.out.println("2 - Add Item in the Supply");
+                System.out.print("3 - Exit Create Vending Machine Menu\n#");
+                String addAtribb = createVM.nextLine();
+
+                if(addAtribb.equals("1")){
+                    //add Cash
+                } else if(addAtribb.equals("2")){
+                    //add Item
+                } else if(addAtribb.equals("3")){
+                    //exit
+                    isAddVMAttrib = false;
+                    isCreateVendingMenuExit = false;
+                } else {
+                    System.out.println("Invalid choice. Please select again.");
+                    continue;
+                }
+            }
+            //option for addCash / addItem
+            System.out.print("What do you want to do next ?");
+            //addCash
+
+            //addItem
+
+
+        }
+
+        return vm;
+    }
+
+
 
 
 
